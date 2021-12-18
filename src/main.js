@@ -11,6 +11,7 @@ Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios
+axios.defaults.withCredentials = true
 new Vue({
   el: '#app',
   router,
