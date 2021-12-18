@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import ShowAllSeat from "../components/ShowAllSeat";
+import showFloorInfo from "../components/showFloorInfo";
+import ShowByFloor from "../components/ShowByFloor";
+import Index from "../components/Index"
+import sbf from "../components/sbf";
 
 Vue.use(Router)
 
@@ -10,13 +14,26 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Index',
+      component: Index,
+      meta: {
+        title: '小小志的数据库课设'
+      }
     },
     {
       path: '/showSeats',
       name: 'ShowAllSeats',
       component: ShowAllSeat
+    },
+    {
+      path: '/showFloorInfo',
+      name: 'showFloorInfo',
+      component: showFloorInfo
+    },
+    {
+      path: '/showByFloor:floor',
+      name: 'showByFloor',
+      component: ShowByFloor
     }
   ]
 })

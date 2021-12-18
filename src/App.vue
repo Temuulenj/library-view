@@ -1,20 +1,48 @@
-<template>
+<template style="margin: 0;padding: 0">
   <el-container>
-    <el-header>
-      Welcome to Library System
+    <el-header style="height: 7.5vh;padding: 0;line-height: 10px">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="background-color: #B3C0D1;color: black">
+        <el-submenu index="1">
+          <template slot="title" style="color: black">{{ active }}</template>
+          <el-menu-item index="1" @click="go2index()">首页</el-menu-item>
+          <el-menu-item index="2" @click="go2showFloorInfo()">预约座位</el-menu-item>
+          <el-menu-item index="3">选项3</el-menu-item>
+        </el-submenu>
+        <h1 style="margin: 1.2vh;padding: 0;float: right"><el-avatar class="md_headpic" :size="40" :src="avatarUrl" />{{'  '+name}}</h1>
+      </el-menu>
     </el-header>
-    <el-main>
+    <el-main style="height: 85vh;margin: 0;padding: 0">
       <router-view/>
     </el-main>
-    <Footer/>
+    <el-footer style=" height: 7.5vh">
+      <a style="color:#666;" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">蒙ICP备20002846号</a>
+    </el-footer>
   </el-container>
 </template>
-
 <script>
-import Footer from "./components/Footer";
 export default {
   name: 'App',
-  components: {Footer}
+  data(){
+    return{
+      avatarUrl: '../static/img/avatar.jpg',
+      name: '小小志',
+      activeIndex: '1',
+      activeIndex2: '1',
+      active: '首页',
+    }
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+    },
+    go2index(){
+      this.$router.push('/')
+      this.active='首页'
+    },
+    go2showFloorInfo(){
+      this.$router.push('/showFloorInfo')
+      this.active='预约座位'
+    }
+  }
 }
 </script>
 
@@ -25,12 +53,39 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
-el-main{
-  text-align: center;
+html,body{
+  margin: 0;
+  padding: 0;
 }
-Footer{
+.el-header, .el-footer {
+  background-color: #B3C0D1;
+  color: #333;
   text-align: center;
+  line-height: 60px;
+  width: 100%;
+}
+.el-header{
+  top: 0;
+  height: 80%;
+}
+.el-footer{
+  position:fixed;
+  bottom: 0;
+}
+.el-main {
+  height: 60%;
+  background-color: #E9EEF3;
+  color: #333;
+  text-align: center;
+  /*line-height: 160px;*/
+}
+.userInfo {
+  line-height: 80px;
+}
+.md_headpic {
+  border: none;
+  vertical-align: middle;
+  margin-left: 10px;
 }
 </style>

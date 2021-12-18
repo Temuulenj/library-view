@@ -1,0 +1,72 @@
+<template style="margin: 0;padding: 0">
+  <el-container>
+    <el-header height="80" >
+      <div class="userInfo" style="float: right">
+        <h1 style="margin: 0;padding: 0"><el-avatar class="md_headpic" :size="40" :src="avatarUrl" />{{'  '+name}}</h1>
+      </div>
+    </el-header>
+    <el-main>
+      <router-view v-wechat-title="$route.meta.title"/>
+    </el-main>
+    <el-footer style="height: 10%">
+      <a style="color:#666;" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">蒙ICP备20002846号</a>
+    </el-footer>
+  </el-container>
+</template>
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      avatarUrl: '../static/img/avatar.jpg',
+      name: '小小志'
+    }
+  },
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  margin: 0;
+  padding: 0;
+}
+.el-header, .el-footer {
+  background-color: #B3C0D1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+  width: 100%;
+}
+.el-header{
+  top: 0;
+  height: 80%;
+}
+.el-footer{
+  position:fixed;
+  bottom: 0;
+}
+.el-main {
+  height: 60%;
+  background-color: #E9EEF3;
+  color: #333;
+  text-align: center;
+  /*line-height: 160px;*/
+}
+.userInfo {
+  line-height: 80px;
+}
+.md_headpic {
+  border: none;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+</style>

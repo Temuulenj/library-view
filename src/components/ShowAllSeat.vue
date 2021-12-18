@@ -1,9 +1,8 @@
 <template>
   <el-table
     :data="seats"
-    height="250"
-    border
-    style="width: 100%">
+    v-loading="loading"
+    >
     <el-table-column
       prop="seatId"
       label="座位编号"
@@ -40,7 +39,8 @@ export default {
   name: "ShowAllSeat",
   data() {
     return {
-      seats: []
+      seats: [],
+      loading: 'true'
     }
   },
   methods: {
@@ -61,8 +61,10 @@ export default {
         method: 'get',
       }).then((response=>{
         this.seats=response.data;
+        this.loading=false;
       })).catch((error=>{
-        alert("error");
+        this.loading=false;
+        alert("获取信息失败！");
       }))
   }
 }
