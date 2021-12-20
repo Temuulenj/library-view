@@ -6,6 +6,9 @@ import showFloorInfo from "../components/showFloorInfo";
 import ShowByFloor from "../components/ShowByFloor";
 import Index from "../components/Index"
 import sbf from "../components/sbf";
+import signIn from "../components/signIn";
+import signUp from "../components/signUp";
+import readerInfo from "../components/readerInfo";
 
 Vue.use(Router)
 
@@ -34,6 +37,21 @@ export default new Router({
       path: '/showByFloor:floor',
       name: 'showByFloor',
       component: ShowByFloor
+    },
+    {
+      path: '/signIn',
+      name: 'signIn',
+      component: signIn
+    },
+    {
+      path: '/signUp',
+      name: 'signUp',
+      component: signUp
+    },
+    {
+      path: '/readerInfo',
+      name: 'readerInfo',
+      component: readerInfo
     }
   ]
 })

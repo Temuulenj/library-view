@@ -4,10 +4,9 @@
       <!--{{this.session.sessionId}}-->
         <el-radio-group v-model="selection"  >
           <el-radio-button label="可预约" @click.native="select(1)"></el-radio-button>
-          <!--todo-->
           <el-radio-button label="不可预约" @click.native="select(0)"></el-radio-button>
           <el-radio-button label="全部" @click.native="select(3)"></el-radio-button>
-          </el-radio-group>
+        </el-radio-group>
     </el-row>
     <el-row v-loading="loading" style="min-height: 100px">
       <el-col :span="8" v-for="item in seats" :key="item.data" >
@@ -31,10 +30,12 @@ export default {
       selection: '可预约',//可预约/不可预约
       num: this.$route.params.floor,
       input: this.$route.params.floor,
+      itm: '1'
     }
   },
   methods: {
     select(item){
+      this.itm=item
       this.loading=true
       this.$axios({
         url: 'api/getByFloor?floor='+this.floor+"&status="+item,
@@ -47,25 +48,30 @@ export default {
       }))
     },
     reserve(seatId){
+      this.loading=true
       this.$axios({
         url: 'api/reserve',
         method: 'post',
         params: {
-          seatId: this.seatId,
-          //readerId: this.session.
+          seatId: seatId,
+          status: '1',
+          readerId: this.$store.state.readerInfo.readerId,
         }
       }).then((response => {
-        this.seats=response.data
+        this.select(this.itm)
+        this.$store.state.readerInfo.reserveStatus=0
+        this.$store.state.readerInfo.seatId=seatId
+        location.reload()
+        sessionStorage.setItem("readerInfo",JSON.stringify(this.$store.state.readerInfo))
         this.loading = false;
       })).catch((error => {
         this.loading = false;
-        alert(JSON.parse(sessionStorage.getItem("sessionID")))
       }))
-    }
+    },
   },
-  created: function (){
+  created (){
     this.$axios({
-      url: 'api/getByFloor?floor='+this.floor+'&status=3',
+      url: 'api/getByFloor?floor='+this.floor+'&status='+this.itm,
       method: 'get',
     }).then((response => {
       this.seats=response.data
