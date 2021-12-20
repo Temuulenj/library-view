@@ -8,7 +8,9 @@ export default new Vuex.Store({
       name: '',
       email: '',
       reserveStatus: '',
-      seatId: ''
+      seatId: '',
+      numberOfViolation: '',
+      signInStatus: ''
     },
     signInStatus: 0,
   },
@@ -25,6 +27,10 @@ export default new Vuex.Store({
     },
     setReaderInfo(state){
     },
+    updateReaderInfo(state,readerInfo){
+      state.readerInfo=readerInfo
+      sessionStorage.setItem('readerInfo',JSON.stringify(readerInfo))
+    }
   },
   actions: {
     reserve(state){

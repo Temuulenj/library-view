@@ -38,7 +38,7 @@ export default {
           alert("密码错误")
         }else {
           this.$store.commit('signIn',response.data)
-          location.reload()
+          this.$router.go(-1)
         }
       })).catch((error)=>{
         alert(error)
@@ -54,3 +54,5 @@ fieldset {
   border:2px solid #DCDFE6;  text-align:left; border-radius: 8px;margin: 2vh auto;max-width: 500px;
 }
 </style>
+
+
