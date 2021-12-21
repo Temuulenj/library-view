@@ -10,9 +10,13 @@
     </el-row>
     <el-row v-loading="loading" style="min-height: 100px" >
       <el-col :span="8" v-for="item in seats" :key="item.data" >
-        <el-card :body-style="{ padding: '5px',margin: '5px' }" shadow="hover" @click.native="reserve(item.seatId)">
+        <el-card v-if="item.status==1" :body-style="{ padding: '5px',margin: '5px',color: 'green' }" shadow="hover" @click.native="reserve(item.seatId)">
           {{'座位号:'+item.num}}<br>
-          {{'状态：'+ ((item.status==1)?'可预约':'不可预约')}}
+          {{((item.status==1)?'可预约':'不可预约')}}
+        </el-card>
+        <el-card v-else :body-style="{ padding: '5px',margin: '5px',color: 'red' }" shadow="hover" @click.native="reserve(item.seatId)">
+          {{'座位号:'+item.num}}<br>
+          {{((item.status==1)?'可预约':'不可预约')}}
         </el-card>
       </el-col>
     </el-row>
@@ -52,34 +56,13 @@ export default {
         alert('您还未登录！')
         return;
       }
-      this.loading=true
-      this.$axios({
-        url: 'api/reserve',
-        method: 'post',
+      this.$store.commit('setReserveSeat',seatId)
+      this.$router.push({
+        name: 'reserveInfo',
         params: {
-          seatId: seatId,
-          status: '1',
-          readerId: this.$store.state.readerInfo.readerId,
+          seatId: seatId
         }
-      }).then((response => {
-       // this.select(this.itm)
-        //TODO
-        //请求完成后跳到可预约界面
-        if (response.data==='success') {
-          this.$store.state.readerInfo.reserveStatus = 0
-          this.$store.state.readerInfo.seatId = seatId
-          //👇他的锅
-          location.reload()
-          sessionStorage.setItem("readerInfo", JSON.stringify(this.$store.state.readerInfo))
-          this.loading = false;
-        }
-        else {
-          this.loading=false
-          alert(response.data)
-        }
-      })).catch((error => {
-        this.loading = false;
-      }))
+      })
     },
   },
   created (){

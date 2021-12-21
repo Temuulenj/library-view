@@ -1,19 +1,24 @@
 <template style="margin: 0;padding: 0">
   <el-container>
     <el-header style="height: 7.5vh;padding: 0;line-height: 10px">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="background-color: #B3C0D1;color: black">
-        <el-submenu index="1">
-          <template slot="title" style="color: black">{{ active }}</template>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="background-color: #a3d7e2">
+        <el-submenu index="1" >
+          <template slot="title">{{ active }}</template>
           <el-menu-item index="1" @click="go2index()">首页</el-menu-item>
           <el-menu-item index="2" @click="go2showFloorInfo()">预约座位</el-menu-item>
-          <el-menu-item index="3">选项3</el-menu-item>
+          <el-menu-item index="3">个人信息</el-menu-item>
         </el-submenu>
-        <el-row v-if="$store.state.signInStatus===1" style="margin: 1.2vh;padding: 0;float: right;" >
-          <h1 style="margin: 0;padding: 0">
-            <el-avatar class="md_headpic" :size="40" :src="avatarUrl" />{{'  '+readerInfo.name}}
-            <el-link @click="$store.commit('signOut')" type="primary">注销</el-link>
-          </h1>
-        </el-row>
+        <el-dropdown v-if="$store.state.signInStatus===1" @command="handleCommand" style="margin: 1.2vh;padding: 0;float: right;">
+          <el-row >
+            <h1 style="margin: 0;padding: 0">
+              <el-avatar class="md_headpic" :size="40" :src="avatarUrl" />{{'  '+readerInfo.name}}
+            </h1>
+          </el-row>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="readerInfo">个人信息</el-dropdown-item>
+            <el-dropdown-item command="signOut">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <el-row v-else style="margin-top: 10px;padding: 0;float: right; margin-right: 10px">
           <el-button size="medium" type="primary" round @click="signUp()">注 册</el-button>
           <el-button size="medium" type="primary" round @click="signIn()">登 录</el-button>
@@ -29,7 +34,10 @@
       <router-view v-loading="loading" style="text-align: center"/>
     </el-main>
     <el-footer style=" height: 7.5vh">
-      <a style="color:#666;" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">蒙ICP备20002846号</a>
+      <el-row>
+        <a style="color:#666;" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">蒙ICP备20002846号</a>&nbsp;
+        <a style="color:#666;" href="https://temuulen.cn">Copyright ©小小志</a>
+      </el-row>
     </el-footer>
   </el-container>
 </template>
@@ -84,8 +92,15 @@ export default {
       })).catch((error => {
         this.loading = false;
       }))
-//todo
     },
+    handleCommand(command) {
+      if (command==='readerInfo'){
+        this.$router.push('readerInfo')
+      }
+      if (command==='signOut'){
+        this.$store.commit('signOut')
+      }
+    }
   },
   created() {
     if (sessionStorage.getItem('readerInfo')==null){
@@ -109,7 +124,7 @@ html,body{
   padding: 0;
 }
 .el-header, .el-footer {
-  background-color: #B3C0D1;
+  background-color: #a3d7e2;
   color: #333;
   text-align: center;
   line-height: 60px;
@@ -125,7 +140,10 @@ html,body{
 }
 .el-main {
   height: 60%;
-  background-color: #E9EEF3;
+  background-image: url("/static/img/bg_flavor.jpg");
+  background-repeat: repeat;
+  background-size: 600px;
+  background-position: center;
   color: #333;
   text-align: center;
   /*line-height: 160px;*/

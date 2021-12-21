@@ -12,6 +12,7 @@ export default new Vuex.Store({
       numberOfViolation: '',
       signInStatus: ''
     },
+    reserveSeat: '',
     signInStatus: 0,
   },
   mutations: {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     updateReaderInfo(state,readerInfo){
       state.readerInfo=readerInfo
       sessionStorage.setItem('readerInfo',JSON.stringify(readerInfo))
+    },
+    setReserveSeat(state,reserveSeat){
+      state.reserveSeat=reserveSeat
     }
   },
   actions: {

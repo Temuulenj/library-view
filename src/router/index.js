@@ -9,6 +9,7 @@ import sbf from "../components/sbf";
 import signIn from "../components/signIn";
 import signUp from "../components/signUp";
 import readerInfo from "../components/readerInfo";
+import reserveInfo from "../components/reserveInfo";
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/readerInfo',
       name: 'readerInfo',
       component: readerInfo
+    },
+    {
+      path: '/reserveInfo:seatId',
+      name: 'reserveInfo',
+      component: reserveInfo
     }
   ]
 })

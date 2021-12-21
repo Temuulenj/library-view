@@ -24,7 +24,6 @@ export default {
   name: "readerInfo",
     data() {
       return {
-
       }
     },
   computed: {
