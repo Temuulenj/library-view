@@ -6,7 +6,8 @@
       :picker-options="{
         start: '08:30',
         step: '00:15',
-        end: '21:00'
+        end: '21:00',
+        minTime: new Date().getHours()+':'+new Date().getMinutes()
       }"
     style="width: 90%">
     </el-time-select>
@@ -17,7 +18,7 @@
         start: '08:30',
         step: '00:15',
         end: '21:30',
-        minTime: startTime
+        minTime: startTime===null?'23:59':startTime
       }"
     style="margin: 5px auto; width: 90%">
     </el-time-select>
@@ -27,7 +28,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 export default {
   name: "reserveInfo",
   data() {

@@ -43,7 +43,6 @@ export default {
         alert('请输入密码')
         return;
       }
-      return
       if(this.readerInfo.email==='') {
         alert('请输入邮箱')
         return;
@@ -52,7 +51,7 @@ export default {
         alert('请重新输入密码')
         return;
       }
-      if(!this.repass.equal!=this.readerInfo.password) {
+      if(this.repass!==this.readerInfo.password) {
         alert('两次密码不相同')
         return;
       }

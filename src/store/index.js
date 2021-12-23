@@ -1,8 +1,9 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import  Vue from 'vue'
+import Vuex from 'vuex'
 Vue.use(Vuex)
+
 export default new Vuex.Store({
-  state :{
+  state: {
     readerInfo: {
       readerId: '',
       name: '',
@@ -10,7 +11,7 @@ export default new Vuex.Store({
       reserveStatus: '',
       seatId: '',
       numberOfViolation: '',
-      signInStatus: ''
+      signInStatus: '',
     },
     reserveSeat: '',
     signInStatus: 0,
@@ -28,9 +29,19 @@ export default new Vuex.Store({
     },
     setReaderInfo(state){
     },
+    reserveSignIn(state){
+      state.readerInfo.signInStatus=0
+      sessionStorage.setItem("readerInfo",JSON.stringify(state.readerInfo))
+    },
+    reserveSignOut(state){
+      state.readerInfo.reserveStatus=1
+      state.readerInfo.seatId=null
+      state.readerInfo.signInStatus=1
+      sessionStorage.setItem("readerInfo",JSON.stringify(state.readerInfo))
+    },
     updateReaderInfo(state,readerInfo){
       state.readerInfo=readerInfo
-      sessionStorage.setItem('readerInfo',JSON.stringify(readerInfo))
+      sessionStorage.setItem('readerInfo',JSON.stringify(state.readerInfo))
     },
     setReserveSeat(state,reserveSeat){
       state.reserveSeat=reserveSeat

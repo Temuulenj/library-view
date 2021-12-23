@@ -3,7 +3,7 @@
     <legend >个人信息</legend>
     <el-form label-width="80px">
       <el-form-item label="学号" >
-      <el-input v-model="readerInfo.readerId" :disabled="true"></el-input>
+        <el-input v-model="readerInfo.readerId" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item label="姓名">
         <el-input v-model="readerInfo.name" :disabled="true"></el-input>
@@ -11,8 +11,11 @@
       <el-form-item label="邮箱">
         <el-input v-model="readerInfo.email" :disabled="true"></el-input>
       </el-form-item>
-      <el-form-item v-if="readerInfo.reserveStatus==='0'" label="预约座位">
-        <el-input v-model="readerInfo.seatId"></el-input>
+      <el-form-item v-if="readerInfo.reserveStatus===0" label="已预约">
+        <el-input v-model="readerInfo.seatId" :disabled="true"></el-input>
+      </el-form-item>
+      <el-form-item label="违约次数">
+        <el-input v-model="readerInfo.numberOfViolation" :disabled="true"></el-input>
       </el-form-item>
     </el-form>
   </fieldset>

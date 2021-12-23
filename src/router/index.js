@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
-import ShowAllSeat from "../components/ShowAllSeat";
-import showFloorInfo from "../components/showFloorInfo";
+import showFloorInfo from "../components/ShowFloorInfo";
 import ShowByFloor from "../components/ShowByFloor";
 import Index from "../components/Index"
-import sbf from "../components/sbf";
 import signIn from "../components/signIn";
 import signUp from "../components/signUp";
 import readerInfo from "../components/readerInfo";
@@ -20,14 +17,6 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index,
-      meta: {
-        title: '小小志的数据库课设'
-      }
-    },
-    {
-      path: '/showSeats',
-      name: 'ShowAllSeats',
-      component: ShowAllSeat
     },
     {
       path: '/showFloorInfo',
@@ -58,6 +47,9 @@ export default new Router({
       path: '/reserveInfo:seatId',
       name: 'reserveInfo',
       component: reserveInfo
+    },
+    {
+      path: ''
     }
   ]
 })

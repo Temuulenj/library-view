@@ -14,7 +14,7 @@
           {{'座位号:'+item.num}}<br>
           {{((item.status==1)?'可预约':'不可预约')}}
         </el-card>
-        <el-card v-else :body-style="{ padding: '5px',margin: '5px',color: 'red' }" shadow="hover" @click.native="reserve(item.seatId)">
+        <el-card v-else :body-style="{ padding: '5px',margin: '5px',color: 'red' }" shadow="hover" @click.native="canNotReserve()">
           {{'座位号:'+item.num}}<br>
           {{((item.status==1)?'可预约':'不可预约')}}
         </el-card>
@@ -56,6 +56,10 @@ export default {
         alert('您还未登录！')
         return;
       }
+      if (this.$store.state.readerInfo.reserveStatus===0){
+        alert('您已预约！不可以预约重复嗷~')
+        return;
+      }
       this.$store.commit('setReserveSeat',seatId)
       this.$router.push({
         name: 'reserveInfo',
@@ -64,6 +68,9 @@ export default {
         }
       })
     },
+    canNotReserve(){
+      alert('此座位目前不可预约');
+    }
   },
   created (){
     this.$axios({
